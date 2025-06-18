@@ -1,14 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ApiService } from '../../core/services/api.service';
 import { RouterModule } from '@angular/router';
-
+import { FormsModule } from '@angular/forms';
 import { Post } from '../../models/interface';
 
 @Component({
   selector: 'app-posts-list',
-  standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, FormsModule],
   animations: [
     {
       name: 'crazyListIn',
@@ -39,36 +38,70 @@ import { Post } from '../../models/interface';
 })
 export class PostListComponent implements OnInit {
   posts: Post[] = [];
+  filteredPosts: Post[] = []; 
   paginatedPosts: Post[] = [];
   currentPage = 1;
   pageSize = 10;
   isLoading = false;
+  searchTerm = '';
   
+  // Mobile menu state 
+  isMobileMenuOpen = true;
 
   constructor(private apiService: ApiService) {}
 
- readonly tags = ['health', 'technology', 'photography', 'travel', 'design', 'education', 'lifestyle', 'food', 'development', 'ai'];
+  readonly tags = ['health', 'technology', 'photography', 'travel', 'design', 'education', 'lifestyle', 'food', 'development', 'ai'];
 
-ngOnInit(): void {
-  this.apiService.getPosts().subscribe((data) => {
-    this.posts = data.map((post) => {
-      const tag = this.tags[Math.floor(Math.random() * this.tags.length)];
+  ngOnInit(): void {
+    this.apiService.getPosts().subscribe((data) => {
+      this.posts = data.map((post) => {
+        const tag = this.tags[Math.floor(Math.random() * this.tags.length)];
+        const imageUrl = `https://picsum.photos/seed/post-${post.id}/600/400`;
+        return { ...post, tag, imageUrl };
+      });
 
-      // Generate a consistent but random-looking image URL from Picsum
-      const imageUrl = `https://picsum.photos/seed/post-${post.id}/600/400`;
-
-      return { ...post, tag, imageUrl };
+      this.filteredPosts = [...this.posts];
+      this.updatePagination();
     });
+  }
 
+  // Mobile menu toggle method
+  toggleMobileMenu(): void {
+    this.isMobileMenuOpen = !this.isMobileMenuOpen;
+  }
+
+  onSearch(): void {
+    const term = this.searchTerm.trim().toLowerCase();
+
+    this.filteredPosts = this.posts.filter(post =>
+      post.title.toLowerCase().includes(term) || 
+      post.body.toLowerCase().includes(term) ||
+      post.tag.toLowerCase().includes(term)
+    );
+
+    this.currentPage = 1;
     this.updatePagination();
-  });
-}
-
+   
+  }
 
   updatePagination(): void {
     const start = (this.currentPage - 1) * this.pageSize;
     const end = start + this.pageSize;
-    this.paginatedPosts = this.posts.slice(start, end);
+    this.paginatedPosts = this.filteredPosts.slice(start, end);
+  }
+
+  // Optional: Close mobile menu when clicking outside
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: Event): void {
+    const target = event.target as HTMLElement;
+    const mobileMenuToggle = target.closest('.mobile-menu-toggle');
+    const mobileMenuContent = target.closest('.mobile-menu-content');
+   const searchBar = target.closest('.search-bar');
+
+    // Close menu if clicking outside of menu toggle or content
+    if (!mobileMenuToggle && !mobileMenuContent && !searchBar && this.isMobileMenuOpen) {
+      this.isMobileMenuOpen = false;
+    }
   }
 
   goToPage(page: string | number): void {
@@ -77,12 +110,9 @@ ngOnInit(): void {
   }
 
   get totalPages(): number {
-    return Math.ceil(this.posts.length / this.pageSize);
+    return Math.ceil(this.filteredPosts.length / this.pageSize); // Fixed: use filteredPosts instead of posts
   }
 
-  //  get totalPagesArray(): number[] {
-  //   return Array(this.totalPages).fill(0).map((_, i) => i + 1);
-  // }
   get totalPagesArray(): (string | number)[] {
     const totalPages = this.totalPages;
     const current = this.currentPage;
@@ -109,17 +139,16 @@ ngOnInit(): void {
   }
 
   goToPreviousPage(): void {
-  if (this.currentPage > 1) {
-    this.currentPage--;
-    this.updatePagination();
+    if (this.currentPage > 1) {
+      this.currentPage--;
+      this.updatePagination();
+    }
   }
-}
 
-goToNextPage(): void {
-  if (this.currentPage < this.totalPages) {
-    this.currentPage++;
-    this.updatePagination();
+  goToNextPage(): void {
+    if (this.currentPage < this.totalPages) {
+      this.currentPage++;
+      this.updatePagination();
+    }
   }
-}
-
 }
