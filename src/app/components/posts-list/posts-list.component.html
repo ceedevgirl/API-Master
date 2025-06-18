@@ -54,7 +54,7 @@
             <h3>{{ post.title }}</h3>         
             <p>{{ post.body }}</p>         
             <span class="tag" [ngClass]="post.tag">{{ post.tag }}</span>          
-            <div class="external-icon tooltip">&#8599;              
+            <div class="external-icon tooltip" (click)="navigateToPost(post.id)">&#8599;              
               <span class="tooltip-text">View Comments</span>          
             </div>       
           </div>     
@@ -71,7 +71,7 @@
             <h3>{{ post.title }}</h3>           
             <p>{{ post.body }}</p>           
             <span class="tag" [ngClass]="post.tag">{{ post.tag }}</span>           
-            <div class="external-icon tooltip">&#8599;              
+            <div class="external-icon tooltip" (click)="navigateToPost(post.id)">&#8599;              
               <span class="tooltip-text">View Comments</span>           
             </div>         
           </div>       

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ApiService } from '../../core/services/api.service';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Post } from '../../models/interface';
 
 @Component({
@@ -48,7 +49,14 @@ export class PostListComponent implements OnInit {
   // Mobile menu state 
   isMobileMenuOpen = true;
 
-  constructor(private apiService: ApiService) {}
+  constructor(
+    private router: Router,
+    private apiService: ApiService
+  ) {}
+
+  navigateToPost(id: number): void {
+  this.router.navigate(['/post', id]);
+  }
 
   readonly tags = ['health', 'technology', 'photography', 'travel', 'design', 'education', 'lifestyle', 'food', 'development', 'ai'];
 
