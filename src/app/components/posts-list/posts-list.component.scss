@@ -1,0 +1,435 @@
+@use '../../styles/variables'as *;
+@use '../../styles/mixins'as *;
+
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem;
+}
+
+/* Header Styling */
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+    border-bottom: 1px solid #e0e0e0;
+    margin-bottom: 2rem;
+}
+
+.title {
+    color: #007bff;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.create-btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 9999px;
+    cursor: pointer;
+    font-weight: 500;
+    border-radius: 9999px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    @include neon-hover;
+}
+
+/* Main Content and Posts Container */
+.main-container {
+    width: 100%;
+}
+
+.posts-container {
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: 1fr;
+}
+
+
+/* Post Card General Styling */
+.post-card {
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    background: linear-gradient(to top right, #f1f5f9, #e2e8f0);
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.15);
+    @include card-hover;
+}
+
+.post-image {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.post-content {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    position: relative;
+}
+
+.post-content h3 {
+    margin: 0 0 0.5rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.post-content p {
+    margin: 0 0 1rem;
+    color: #6c757d;
+    flex-grow: 1;
+}
+
+.tag {
+    // background-color: #f1f3f5;
+    color: #495057;
+    padding: 0.25rem 0.75rem;
+    border-radius: 15px;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    align-self: flex-start;
+}
+
+.tag.health {
+    background: linear-gradient(135deg, #d1fae5, #a7f3d0); // mint-green
+    color: #064e3b;
+}
+
+.tag.technology {
+    background: linear-gradient(135deg, #dbeafe, #bfdbfe); // light blue
+    color: #1e3a8a;
+}
+
+.tag.photography {
+    background: linear-gradient(135deg, #fce7f3, #fbcfe8); // soft pink
+    color: #9d174d;
+}
+
+.tag.travel {
+    background: linear-gradient(135deg, #e0f2fe, #bae6fd); // sky-blue
+    color: #0369a1;
+}
+
+.tag.design {
+    background: linear-gradient(135deg, #fef9c3, #fde68a); // light yellow
+    color: #92400e;
+}
+
+.tag.education {
+    background: linear-gradient(135deg, #ede9fe, #ddd6fe); // soft purple
+    color: #4c1d95;
+}
+
+
+.tag.lifestyle {
+    background: linear-gradient(135deg, #00c6ff, #0072ff);
+    color: #ffffff;
+}
+
+.tag.development {
+    background: linear-gradient(135deg, #2afadf, #4facfe);
+    color: #064e3b;
+}
+
+.tag.ai {
+    background: linear-gradient(135deg, #9333ea, #e11d48);
+    color: #fef9f9;
+}
+
+.tag.food {
+    background: linear-gradient(135deg, #f43f5e, #fb7185);
+    color: #fff7f9;
+}
+
+.external-icon {
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+    font-size: 1.5rem;
+    align-self: flex-end;
+    color: #718096;
+    font-weight: 900;
+    transition: color 0.2s ease;
+
+    &:hover {
+        color: #38bdf8;
+        cursor: pointer;
+    }
+
+
+}
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+
+    .tooltip-text {
+        font-size: 0.5rem;
+        visibility: hidden;
+        width: max-content;
+        background-color: #f1f5f9;
+        color: #718096;
+        text-align: center;
+        border-radius: 6px;
+        padding: 0.4rem 0.75rem;
+        position: absolute;
+        z-index: 1;
+        bottom: 125%;
+        /* Position above the icon */
+        left: 50%;
+        transform: translateX(-50%);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+
+        &::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            /* Arrow bottom of tooltip */
+            left: 50%;
+            transform: translateX(-50%);
+            border-width: 6px;
+            border-style: solid;
+            border-color: #38bdf8 transparent transparent transparent;
+        }
+    }
+
+    &:hover .tooltip-text {
+        visibility: visible;
+        opacity: 1;
+    }
+}
+
+
+
+/* Featured Post Styling */
+.featured-post {
+    width: 100%;
+}
+
+.featured-post .post-card {
+    flex-direction: column;
+}
+
+.featured-post .post-image {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+}
+
+/* Recent Posts Styling */
+.recent-posts {
+    display: grid;
+    gap: 1.5rem;
+}
+
+.post-card.recent {
+    flex-direction: column;
+}
+
+.post-card.recent .post-image {
+    height: 180px;
+}
+
+/* Mobile Layout (Default) */
+.post-card.recent {
+    flex-direction: column;
+}
+
+.post-card.recent .post-image {
+    height: 180px;
+}
+
+/* Tablet Layout */
+@media (min-width: 768px) {
+    .posts-container {
+        grid-template-columns: 1fr;
+    }
+
+    /* This rule now applies to ALL post cards on tablet */
+    .post-card {
+        flex-direction: row;
+    }
+
+    .featured-post .post-card,
+    .post-card.recent {
+        flex-direction: row;
+    }
+
+    .featured-post .post-image,
+    .post-card.recent .post-image {
+        width: 200px;
+        height: auto;
+        min-height: 150px;
+        flex-shrink: 0;
+    }
+
+    .featured-post .post-content,
+    .post-card.recent .post-content {
+        flex: 1;
+    }
+}
+
+/* Desktop Layout */
+@media (min-width: 1024px) {
+    .posts-container {
+        display: grid;
+        gap: 2rem;
+        align-items: flex-start;
+    }
+
+    /* First featured post takes full width at the top */
+    .featured-post:first-child {
+        grid-column: 1 / -1;
+        /* Span all columns */
+        margin-bottom: 1rem;
+    }
+
+    .featured-post:first-child .post-card {
+        flex-direction: row;
+        max-height: 300px;
+    }
+
+    .featured-post:first-child .post-image {
+        width: 40%;
+        height: 300px;
+        object-fit: cover;
+        flex-shrink: 0;
+    }
+
+    .featured-post:first-child .post-content {
+        flex: 1;
+        padding: 2rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .featured-post:first-child .post-content h3 {
+        font-size: 1.8rem;
+        margin-bottom: 1rem;
+        font-weight: 700;
+    }
+
+    .featured-post:first-child .post-content p {
+        font-size: 1.1rem;
+        line-height: 1.6;
+        margin-bottom: 1.5rem;
+    }
+
+    .featured-post:first-child .tag {
+        font-size: 0.9rem;
+        padding: 0.5rem 1rem;
+    }
+
+    /* Remaining posts grid - starts after the featured post */
+    .recent-posts {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5rem;
+        margin-top: 1rem;
+    }
+
+    /* Style for remaining posts */
+    .post-card.recent {
+        flex-direction: column;
+    }
+
+    .post-card.recent .post-image {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+    }
+
+    .post-card.recent .post-content {
+        padding: 1rem;
+    }
+
+    .post-card.recent .post-content h3 {
+        font-size: 1.1rem;
+        margin-bottom: 0.5rem;
+        font-weight: 600;
+    }
+
+    .post-card.recent .post-content p {
+        display: block;
+        font-size: 0.9rem;
+        margin: 0 0 1rem;
+        color: #6c757d;
+        flex-grow: 1;
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+    }
+
+    .post-card.recent .tag {
+        font-size: 0.7rem;
+        padding: 0.2rem 0.6rem;
+    }
+}
+
+/* Footer, Pagination, and Loading Spinner Styling */
+.footer {
+    text-align: center;
+    padding: 2rem 0;
+    margin-top: 2rem;
+    color: #6c757d;
+    border-top: 1px solid #e0e0e0;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2rem;
+}
+
+.pagination button {
+    margin: 0 0.25rem;
+    padding: 0.5rem 1rem;
+    border: 1px solid #dee2e6;
+    background-color: white;
+    cursor: pointer;
+}
+
+.pagination button:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.pagination button.active-page {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
+}
+
+.loading-spinner {
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #3498db;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+    margin: 2rem auto;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
