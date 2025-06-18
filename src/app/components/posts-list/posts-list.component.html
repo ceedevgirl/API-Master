@@ -1,1 +1,104 @@
-<p>posts-list works!</p>
+<div class="container">   
+  <header>   
+    <div class="header-container">     
+      <div class="header-top">       
+        <h1 class="title">BLOG APP</h1>       
+        
+        <!-- Mobile Hamburger Menu Toggle -->
+        <button 
+          class="mobile-menu-toggle" 
+          [class.active]="isMobileMenuOpen"
+          (click)="toggleMobileMenu()"
+          aria-label="Toggle mobile menu">
+          <div class="hamburger-line"></div>
+          <div class="hamburger-line"></div>
+          <div class="hamburger-line"></div>
+        </button>
+        
+        <!-- Desktop New Post Button (hidden on mobile) -->
+        <button class="create-btn">New Post</button>     
+      </div>      
+
+      <!-- Desktop Search Bar (hidden on mobile) -->
+      <div class="search-bar">       
+        <input         
+          type="text"         
+          placeholder="Search posts..."         
+          [(ngModel)]="searchTerm"         
+          (input)="onSearch()"       
+        />     
+      </div>   
+
+      <!-- Mobile Menu Content (shown when hamburger is clicked) -->
+      <div class="mobile-menu-content" [class.active]="isMobileMenuOpen">
+        <button class="create-btn">New Post</button>
+        <div class="search-bar">       
+          <input         
+            type="text"         
+            placeholder="Search posts..."         
+            [(ngModel)]="searchTerm"         
+            (input)="onSearch()"       
+          />     
+        </div>
+      </div>
+    </div> 
+  </header>    
+
+  <main class="main-container">   
+    <div class="posts-container">    
+      <!-- Featured Posts -->   
+      <div class="featured-post" *ngFor="let post of paginatedPosts.slice(0, 1)">     
+        <div class="post-card featured">       
+          <img [src]="post.imageUrl" class="post-image" [alt]="post.tag + ' image'" />       
+          <div class="post-content">         
+            <h3>{{ post.title }}</h3>         
+            <p>{{ post.body }}</p>         
+            <span class="tag" [ngClass]="post.tag">{{ post.tag }}</span>          
+            <div class="external-icon tooltip">&#8599;              
+              <span class="tooltip-text">View Comments</span>          
+            </div>       
+          </div>     
+        </div>   
+      </div>       
+
+      <!-- Recent Posts -->     
+      <div class="recent-posts">       
+        <div          
+          class="post-card recent"          
+          *ngFor="let post of paginatedPosts.slice(1, 10)">         
+          <img [src]="post.imageUrl" class="post-image" [alt]="post.tag + ' image'" />         
+          <div class="post-content">           
+            <h3>{{ post.title }}</h3>           
+            <p>{{ post.body }}</p>           
+            <span class="tag" [ngClass]="post.tag">{{ post.tag }}</span>           
+            <div class="external-icon tooltip">&#8599;              
+              <span class="tooltip-text">View Comments</span>           
+            </div>         
+          </div>       
+        </div>     
+      </div> 
+    </div> 
+  </main>     
+
+  <!-- Loading Spinner -->   
+  <div class="loading-spinner" *ngIf="isLoading"></div>    
+
+  <!-- Pagination -->   
+  <div class="pagination">     
+    <button (click)="goToPreviousPage()" [disabled]="currentPage === 1">       
+      &laquo; Prev     
+    </button>     
+    <button        
+      *ngFor="let page of totalPagesArray"       
+      (click)="goToPage(page)"       
+      [disabled]="page === '...'"       
+      [class.active-page]="currentPage === page">       
+      {{ page }}     
+    </button>     
+    <button (click)="goToNextPage()" [disabled]="currentPage === totalPages">       
+      Next &raquo;     
+    </button>   
+  </div>    
+
+  <footer class="footer">Copyright &copy; 2025 Blog App</footer> 
+</div>
