@@ -1,1 +1,38 @@
-<p>post-create works!</p>
+<div class="form-wrapper">
+  <h2>Create New Post</h2>
+
+  <form [formGroup]="postForm" (ngSubmit)="submitPost()">
+    <label>
+      Title
+      <input type="text" formControlName="title" placeholder="Enter post title" />
+      @if (postForm.get('title')?.invalid && postForm.get('title')?.touched) {
+        <small class="error-msg">Title must be at least 5 characters.</small>
+      }
+    </label>
+
+    <label>
+      Body
+      <textarea formControlName="body" placeholder="Write your post..."></textarea>
+      @if (postForm.get('body')?.invalid && postForm.get('body')?.touched) {
+        <small class="error-msg">Body must be at least 10 characters.</small>
+      }
+    </label>
+
+    <label>
+      Tag
+      <select formControlName="tag">
+        <option value="">Select a tag</option>
+        <option *ngFor="let tag of ['technology', 'travel', 'health', 'food', 'design']" [value]="tag">
+          {{ tag }}
+        </option>
+      </select>
+      @if (postForm.get('tag')?.invalid && postForm.get('tag')?.touched) {
+        <small class="error-msg">Please select a tag.</small>
+      }
+    </label>
+
+    <button class="submit-btn" type="submit" [disabled]="postForm.invalid || isSubmitting">
+      {{ isSubmitting ? 'Posting...' : 'Create Post' }}
+    </button>
+  </form>
+</div>

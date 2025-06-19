@@ -8,7 +8,10 @@
     <div class="post-content">
       <h3>{{ p.title }}</h3>
       <p>{{ p.body }}</p>
-      <span class="tag" [ngClass]="p.tag">{{ p.tag }}</span>
+      <div class="tag-edit-container">
+        <span class="tag" [ngClass]="p.tag">{{ p.tag }}</span> 
+</div>
+      <a [routerLink]="['/edit', post.id]" class="edit-btn">Edit 🖊️</a>
 
   </div>
   </div>
