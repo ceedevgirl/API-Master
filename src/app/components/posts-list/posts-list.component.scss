@@ -250,56 +250,17 @@
     text-transform: uppercase;
     align-self: flex-start;
 }
-
-.tag.health {
-    background: linear-gradient(135deg, #d1fae5, #a7f3d0);
-    color: #064e3b;
-}
-
-.tag.technology {
-    background: linear-gradient(135deg, #dbeafe, #bfdbfe);
-    color: #1e3a8a;
-}
-
-.tag.photography {
-    background: linear-gradient(135deg, #fce7f3, #fbcfe8);
-    color: #9d174d;
-}
-
-.tag.travel {
-    background: linear-gradient(135deg, #e0f2fe, #bae6fd);
-    color: #0369a1;
-}
-
-.tag.design {
-    background: linear-gradient(135deg, #fef9c3, #fde68a);
-    color: #92400e;
-}
-
-.tag.education {
-    background: linear-gradient(135deg, #ede9fe, #ddd6fe);
-    color: #4c1d95;
-}
-
-.tag.lifestyle {
-    background: linear-gradient(135deg, #00c6ff, #0072ff);
-    color: #ffffff;
-}
-
-.tag.development {
-    background: linear-gradient(135deg, #2afadf, #4facfe);
-    color: #064e3b;
-}
-
-.tag.ai {
-    background: linear-gradient(135deg, #9333ea, #e11d48);
-    color: #fef9f9;
-}
-
-.tag.food {
-    background: linear-gradient(135deg, #f43f5e, #fb7185);
-    color: #fff7f9;
-}
+/* Tag Themes */
+.tag.health { background: linear-gradient(135deg, #d1fae5, #a7f3d0); color: #064e3b; }
+.tag.technology { background: linear-gradient(135deg, #dbeafe, #bfdbfe); color: #1e3a8a; }
+.tag.photography { background: linear-gradient(135deg, #fce7f3, #fbcfe8); color: #9d174d; }
+.tag.travel { background: linear-gradient(135deg, #e0f2fe, #bae6fd); color: #0369a1; }
+.tag.design { background: linear-gradient(135deg, #fef9c3, #fde68a); color: #92400e; }
+.tag.education { background: linear-gradient(135deg, #ede9fe, #ddd6fe); color: #4c1d95; }
+.tag.lifestyle { background: linear-gradient(135deg, #00c6ff, #0072ff); color: #ffffff; }
+.tag.development { background: linear-gradient(135deg, #2afadf, #4facfe); color: #064e3b; }
+.tag.ai { background: linear-gradient(135deg, #9333ea, #e11d48); color: #fef9f9; }
+.tag.food { background: linear-gradient(135deg, #f43f5e, #fb7185); color: #fff7f9; }
 
 .external-icon {
     position: absolute;
@@ -526,49 +487,4 @@
     margin-top: 2rem;
     color: #6c757d;
     border-top: 1px solid #e0e0e0;
-}
-
-.pagination {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 2rem;
-}
-
-.pagination button {
-    margin: 0 0.25rem;
-    padding: 0.5rem 1rem;
-    border: 1px solid #dee2e6;
-    background-color: white;
-    cursor: pointer;
-}
-
-.pagination button:disabled {
-    cursor: not-allowed;
-    opacity: 0.6;
-}
-
-.pagination button.active-page {
-    background-color: #007bff;
-    color: white;
-    border-color: #007bff;
-}
-
-.loading-spinner {
-    border: 4px solid #f3f3f3;
-    border-top: 4px solid #3498db;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    animation: spin 1s linear infinite;
-    margin: 2rem auto;
-}
-
-@keyframes spin {
-    0% {
-        transform: rotate(0deg);
-    }
-    100% {
-        transform: rotate(360deg);
-    }
 }

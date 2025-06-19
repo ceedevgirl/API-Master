@@ -1,54 +1,37 @@
 import { Component, OnInit, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ApiService } from '../../core/services/api.service';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { Post } from '../../models/interface';
+
 
 @Component({
   selector: 'app-posts-list',
   imports: [CommonModule, RouterModule, FormsModule],
-  animations: [
-    {
-      name: 'crazyListIn',
-      source: `
-        @keyframes enter {
-          0% {
-            opacity: 0;
-            transform: scale(0.8) rotate(-5deg);
-          }
-          40% {
-            opacity: 0.6;
-            transform: scale(1.1) rotate(5deg);
-          }
-          100% {
-            opacity: 1;
-            transform: scale(1) rotate(0deg);
-          }
-        }
-
-        :enter {
-          animation: enter 600ms ease-out;
-        }
-      `
-    }
-  ],
   templateUrl: './posts-list.component.html',
   styleUrls: ['./posts-list.component.scss']
 })
 export class PostListComponent implements OnInit {
+previousPage() {
+throw new Error('Method not implemented.');
+}
+nextPage() {
+throw new Error('Method not implemented.');
+}
   posts: Post[] = [];
-  filteredPosts: Post[] = []; 
+  filteredPosts: Post[] = [];
   paginatedPosts: Post[] = [];
   currentPage = 1;
   pageSize = 10;
   isLoading = false;
   searchTerm = '';
-  
-  // Mobile menu state 
   isMobileMenuOpen = true;
 
-  constructor(private apiService: ApiService) {}
+  constructor(
+    private router: Router,
+    private apiService: ApiService
+  ) {}
 
   readonly tags = ['health', 'technology', 'photography', 'travel', 'design', 'education', 'lifestyle', 'food', 'development', 'ai'];
 
@@ -65,7 +48,6 @@ export class PostListComponent implements OnInit {
     });
   }
 
-  // Mobile menu toggle method
   toggleMobileMenu(): void {
     this.isMobileMenuOpen = !this.isMobileMenuOpen;
   }
@@ -74,14 +56,13 @@ export class PostListComponent implements OnInit {
     const term = this.searchTerm.trim().toLowerCase();
 
     this.filteredPosts = this.posts.filter(post =>
-      post.title.toLowerCase().includes(term) || 
+      post.title.toLowerCase().includes(term) ||
       post.body.toLowerCase().includes(term) ||
       post.tag.toLowerCase().includes(term)
     );
 
     this.currentPage = 1;
     this.updatePagination();
-   
   }
 
   updatePagination(): void {
@@ -90,15 +71,13 @@ export class PostListComponent implements OnInit {
     this.paginatedPosts = this.filteredPosts.slice(start, end);
   }
 
-  // Optional: Close mobile menu when clicking outside
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: Event): void {
     const target = event.target as HTMLElement;
     const mobileMenuToggle = target.closest('.mobile-menu-toggle');
     const mobileMenuContent = target.closest('.mobile-menu-content');
-   const searchBar = target.closest('.search-bar');
+    const searchBar = target.closest('.search-bar');
 
-    // Close menu if clicking outside of menu toggle or content
     if (!mobileMenuToggle && !mobileMenuContent && !searchBar && this.isMobileMenuOpen) {
       this.isMobileMenuOpen = false;
     }
@@ -109,8 +88,26 @@ export class PostListComponent implements OnInit {
     this.updatePagination();
   }
 
+  goToPreviousPage(): void {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+      this.updatePagination();
+    }
+  }
+
+  goToNextPage(): void {
+    if (this.currentPage < this.totalPages) {
+      this.currentPage++;
+      this.updatePagination();
+    }
+  }
+
+  navigateToPost(id: number): void {
+    this.router.navigate(['/post', id]);
+  }
+
   get totalPages(): number {
-    return Math.ceil(this.filteredPosts.length / this.pageSize); // Fixed: use filteredPosts instead of posts
+    return Math.ceil(this.filteredPosts.length / this.pageSize);
   }
 
   get totalPagesArray(): (string | number)[] {
@@ -136,19 +133,5 @@ export class PostListComponent implements OnInit {
     if (end < totalPages) pages.push('...');
 
     return pages;
-  }
-
-  goToPreviousPage(): void {
-    if (this.currentPage > 1) {
-      this.currentPage--;
-      this.updatePagination();
-    }
-  }
-
-  goToNextPage(): void {
-    if (this.currentPage < this.totalPages) {
-      this.currentPage++;
-      this.updatePagination();
-    }
   }
 }
