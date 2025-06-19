@@ -48,11 +48,15 @@ export class ApiService {
     );
   }
 
-  updatePost(id: number, post: Post): Observable<Post> {
-    return this.http.put<Post>(`${this.baseUrl}/posts/${id}`, post).pipe(
-      catchError(this.handleError)
+  updatePost(id: number, data: Post): Observable<Post> {
+  return this.http.put<Post>(`${this.baseUrl}/posts/${id}`, data)
+    .pipe(
+      catchError((error) => {
+        console.error('Error updating post', error);
+        return throwError(() => error); // propagate the error
+      })
     );
-  }
+}
 
   deletePost(id: number): Observable<void> {
     return this.http.delete<void>(`${this.baseUrl}/posts/${id}`).pipe(
@@ -68,5 +72,6 @@ export class ApiService {
   getPostWithComments(postId: number): Observable<Post> {
   return this.http.get<Post>(`${this.baseUrl}/posts/${postId}?_embed=comments`);
 }
+
 
 }

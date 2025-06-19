@@ -109,16 +109,17 @@
 }
 
 .create-btn {
-  background-color: #007bff;
-  color: $white;
-  border: none;
-  padding: 0.75rem 1.5rem;
-  border-radius: 9999px;
-  cursor: pointer;
-  font-weight: 500;
-  font-size: 1rem;
-  transition: all 0.3s ease;
-  @include neon-hover;
+    background-color: #007bff;
+    color: $white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 9999px;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 1rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    @include neon-hover;
 }
 
 @media (max-width: 767px) {
@@ -244,10 +245,6 @@
   text-transform: uppercase;
   align-self: flex-start;
 }
-<<<<<<< HEAD
-
-=======
->>>>>>> feature/post-list
 /* Tag Themes */
 .tag.health { background: linear-gradient(135deg, #d1fae5, #a7f3d0); color: #064e3b; }
 .tag.technology { background: linear-gradient(135deg, #dbeafe, #bfdbfe); color: #1e3a8a; }
@@ -261,19 +258,18 @@
 .tag.food { background: linear-gradient(135deg, #f43f5e, #fb7185); color: #fff7f9; }
 
 .external-icon {
-  position: absolute;
-  bottom: 1rem;
-  right: 1rem;
-  font-size: 1.5rem;
-  align-self: flex-end;
-  color: #718096;
-  font-weight: 900;
-  transition: color 0.2s ease;
-
-  &:hover {
-    color: #38bdf8;
+    position: absolute;
+    bottom: 1rem;
+    right: 0 1rem;
+    font-size: 2rem;
+    align-self: flex-end;
+    margin: 1rem;
+    font-weight: 900;
     cursor: pointer;
-  }
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+  //    filter: hue-rotate(210deg) saturate(3) brightness(0.8);
+  // transition: filter 0.3s ease;
+ 
 }
 
 .tooltip {
