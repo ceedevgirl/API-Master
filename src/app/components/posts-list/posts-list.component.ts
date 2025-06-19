@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { Post } from '../../models/interface';
 import { PaginationComponent } from '../../shared/components/pagination/pagination.component';
 
+
 @Component({
   selector: 'app-posts-list',
   imports: [CommonModule, RouterModule, FormsModule, PaginationComponent],
@@ -13,6 +14,12 @@ import { PaginationComponent } from '../../shared/components/pagination/paginati
   styleUrls: ['./posts-list.component.scss']
 })
 export class PostListComponent implements OnInit {
+previousPage() {
+throw new Error('Method not implemented.');
+}
+nextPage() {
+throw new Error('Method not implemented.');
+}
   posts: Post[] = [];
   filteredPosts: Post[] = [];
   paginatedPosts: Post[] = [];

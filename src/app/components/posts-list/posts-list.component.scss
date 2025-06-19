@@ -244,7 +244,6 @@
   text-transform: uppercase;
   align-self: flex-start;
 }
-
 /* Tag Themes */
 .tag.health { background: linear-gradient(135deg, #d1fae5, #a7f3d0); color: #064e3b; }
 .tag.technology { background: linear-gradient(135deg, #dbeafe, #bfdbfe); color: #1e3a8a; }
@@ -285,49 +284,9 @@
     background-color: #f1f5f9;
     color: #718096;
     text-align: center;
-    border-radius: 6px;
-    padding: 0.4rem 0.75rem;
-    position: absolute;
-    z-index: 1;
-    bottom: 125%;
-    left: 50%;
-    transform: translateX(-50%);
-    opacity: 0;
-    transition: opacity 0.3s ease;
-
-    &::after {
-      content: '';
-      position: absolute;
-      top: 100%;
-      left: 50%;
-      transform: translateX(-50%);
-      border-width: 6px;
-      border-style: solid;
-      border-color: #38bdf8 transparent transparent transparent;
-    }
-  }
-
-  &:hover .tooltip-text {
-    visibility: visible;
-    opacity: 1;
-  }
+    padding: 2rem 0;
+    margin-top: 2rem;
+    color: #6c757d;
+    border-top: 1px solid #e0e0e0;
 }
-
-.loading-spinner {
-  border: 4px solid #f3f3f3;
-  border-top: 4px solid #3498db;
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  animation: spin 1s linear infinite;
-  margin: 2rem auto;
-}
-
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
 }
