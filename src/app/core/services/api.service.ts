@@ -8,7 +8,7 @@ import { Post, PostImage } from '../../models/interface';
   providedIn: 'root'
 })
 export class ApiService {
-  private baseUrl = environment.apiUrl;
+  private baseUrl = environment.NG_APP_API_URL;
 
   constructor(private http: HttpClient) {}
 

@@ -1,4 +1,6 @@
 export const environment = {
   production: true,
-  apiUrl:  import.meta.env['NG_APP_API_URL']
-}
+  NG_APP_API_URL: 'https://jsonplaceholder.typicode.com'
+};
+
+
