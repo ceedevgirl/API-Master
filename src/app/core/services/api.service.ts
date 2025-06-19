@@ -64,4 +64,9 @@ export class ApiService {
     console.error('API Error:', error);
     return throwError(() => new Error('Something went wrong!'));
   }
+
+  getPostWithComments(postId: number): Observable<Post> {
+  return this.http.get<Post>(`${this.baseUrl}/posts/${postId}?_embed=comments`);
+}
+
 }
