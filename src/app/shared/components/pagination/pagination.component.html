@@ -1,1 +1,17 @@
-<p>pagination works!</p>
+<div class="pagination">
+  <button (click)="goToPrevious()" [disabled]="currentPage === 1">
+    &laquo; Prev
+  </button>
+
+  <button
+    *ngFor="let page of totalPagesArray"
+    (click)="goToPage(page)"
+    [disabled]="page === '...'"
+    [class.active-page]="currentPage === page">
+    {{ page }}
+  </button>
+
+  <button (click)="goToNext()" [disabled]="currentPage === totalPages">
+    Next &raquo;
+  </button>
+</div>

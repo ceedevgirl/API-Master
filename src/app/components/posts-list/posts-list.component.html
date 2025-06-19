@@ -83,22 +83,15 @@
   <!-- Loading Spinner -->   
   <div class="loading-spinner" *ngIf="isLoading"></div>    
 
-  <!-- Pagination -->   
-  <div class="pagination">     
-    <button (click)="goToPreviousPage()" [disabled]="currentPage === 1">       
-      &laquo; Prev     
-    </button>     
-    <button        
-      *ngFor="let page of totalPagesArray"       
-      (click)="goToPage(page)"       
-      [disabled]="page === '...'"       
-      [class.active-page]="currentPage === page">       
-      {{ page }}     
-    </button>     
-    <button (click)="goToNextPage()" [disabled]="currentPage === totalPages">       
-      Next &raquo;     
-    </button>   
-  </div>    
+  <app-pagination
+  [currentPage]="currentPage"
+  [totalPagesArray]="totalPagesArray"
+  [totalPages]="totalPages"
+  (pageChange)="goToPage($event)"
+  (previous)="goToPreviousPage()"
+  (next)="goToNextPage()">
+</app-pagination>
+
 
   <footer class="footer">Copyright &copy; 2025 Blog App</footer> 
 </div>
