@@ -159,16 +159,6 @@
   }
 }
 
-@keyframes slideDown {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
 
 /* Tablet and Desktop - Show normal layout */
 @media (min-width: 768px) {
@@ -385,100 +375,6 @@
     }
 }
 
-/* Desktop Layout */
-@media (min-width: 1024px) {
-    .posts-container {
-        display: grid;
-        gap: 2rem;
-        align-items: flex-start;
-    }
-
-    .featured-post:first-child {
-        grid-column: 1 / -1;
-        margin-bottom: 1rem;
-    }
-
-    .featured-post:first-child .post-card {
-        flex-direction: row;
-        max-height: 300px;
-    }
-
-    .featured-post:first-child .post-image {
-        width: 40%;
-        height: 300px;
-        object-fit: cover;
-        flex-shrink: 0;
-    }
-
-    .featured-post:first-child .post-content {
-        flex: 1;
-        padding: 2rem;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-    }
-
-    .featured-post:first-child .post-content h3 {
-        font-size: 1.8rem;
-        margin-bottom: 1rem;
-        font-weight: 700;
-    }
-
-    .featured-post:first-child .post-content p {
-        font-size: 1.1rem;
-        line-height: 1.6;
-        margin-bottom: 1.5rem;
-    }
-
-    .featured-post:first-child .tag {
-        font-size: 0.9rem;
-        padding: 0.5rem 1rem;
-    }
-
-    .recent-posts {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 1.5rem;
-        margin-top: 1rem;
-    }
-
-    .post-card.recent {
-        flex-direction: column;
-    }
-
-    .post-card.recent .post-image {
-        width: 100%;
-        height: 200px;
-        object-fit: cover;
-    }
-
-    .post-card.recent .post-content {
-        padding: 1rem;
-    }
-
-    .post-card.recent .post-content h3 {
-        font-size: 1.1rem;
-        margin-bottom: 0.5rem;
-        font-weight: 600;
-    }
-
-    .post-card.recent .post-content p {
-        display: block;
-        font-size: 0.9rem;
-        margin: 0 0 1rem;
-        color: #6c757d;
-        flex-grow: 1;
-        overflow: hidden;
-        display: -webkit-box;
-        -webkit-line-clamp: 3;
-        -webkit-box-orient: vertical;
-    }
-
-    .post-card.recent .tag {
-        font-size: 0.7rem;
-        padding: 0.2rem 0.6rem;
-    }
-}
 
 /* Footer, Pagination, and Loading Spinner Styling */
 .footer {
