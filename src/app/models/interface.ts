@@ -2,9 +2,9 @@ export interface Post {
   id: number;
   title: string;
   body: string;
-  imageUrl: string;
+  imageUrl?: string;
   tag: string;
-  comments: Comment[];
+  comments?: Comment[];
 }
 export interface PostImage extends Post {
     imageUrl: string;

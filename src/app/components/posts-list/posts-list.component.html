@@ -16,7 +16,7 @@
         </button>
         
         <!-- Desktop New Post Button (hidden on mobile) -->
-        <button class="create-btn">New Post</button>     
+        <a routerLink="/create" class="create-btn">New Post</a>
       </div>      
 
       <!-- Desktop Search Bar (hidden on mobile) -->
@@ -54,7 +54,7 @@
             <h3>{{ post.title }}</h3>         
             <p>{{ post.body }}</p>         
             <span class="tag" [ngClass]="post.tag">{{ post.tag }}</span>          
-            <div class="external-icon tooltip" (click)="navigateToPost(post.id)">&#8599;              
+            <div class="external-icon tooltip" (click)="navigateToPost(post.id)">🗯️              
               <span class="tooltip-text">View Comments</span>          
             </div>       
           </div>     
@@ -71,7 +71,7 @@
             <h3>{{ post.title }}</h3>           
             <p>{{ post.body }}</p>           
             <span class="tag" [ngClass]="post.tag">{{ post.tag }}</span>           
-            <div class="external-icon tooltip" (click)="navigateToPost(post.id)">&#8599;              
+            <div class="external-icon tooltip" (click)="navigateToPost(post.id)">🗯️              
               <span class="tooltip-text">View Comments</span>           
             </div>         
           </div>       
