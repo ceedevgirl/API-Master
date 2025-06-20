@@ -1,0 +1,21 @@
+@use '../../../../../styles.scss' as *;
+
+.pagination-container {
+  @include flex-center();
+  gap: 10px;
+  margin-top: 20px;
+  padding: 10px;
+  background-color: #fff;
+  border-radius: 8px;
+  @include card-shadow();
+
+  .pagination-button {
+    @include button-styles($primary-color, #fff);
+    min-width: 40px;
+
+    &.active {
+      background-color: darken($primary-color, 10%);
+      font-weight: bold;
+    }
+  }
+}
