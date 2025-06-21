@@ -31,40 +31,44 @@ export class PostCreateComponent  {
   errorMessage = signal<string | null>(null);
 
 
-  onSubmit(): void {
-    if (this.postForm.valid) {
-      this.isLoading.set(true);
-      this.successMessage.set(null);
-      this.errorMessage.set(null);
+ onSubmit(): void {
+  if (this.postForm.valid) {
+    this.isLoading.set(true);
+    this.successMessage.set(null);
+    this.errorMessage.set(null);
 
-      const newPost = this.postForm.value;
+    const newPost = this.postForm.value;
 
-      const postToCreate = {
-        title: newPost.title || '',
-        body: newPost.body || '',
-        userId: newPost.userId || 1,
-        tag: newPost.tag || '',
-      };
+    const postToCreate = {
+      title: newPost.title || '',
+      body: newPost.body || '',
+      userId: newPost.userId || 1,
+      tag: newPost.tag || '',
+    };
 
-      this.postService.createPost(postToCreate).subscribe({
-        next: (response) => {
-          this.successMessage.set('Post created successfully!');
-          this.isLoading.set(false);
-          this.postForm.reset({ userId: 1 });
-          this.router.navigate(['/posts', response.id]);
-        },
-        error: (err) => {
-          this.errorMessage.set('Failed to create post. Please try again.');
-          this.isLoading.set(false);
-          console.error(err);
-        }
-      });
-    } else {
-      this.errorMessage.set('Please correct the errors in the form.');
-      this.postForm.markAllAsTouched();
-    }
+    this.postService.createPost(postToCreate).subscribe({
+      next: (response) => {
+        this.successMessage.set('Post created successfully!');
+        this.isLoading.set(false);
+        this.postForm.reset({ userId: 1 });
+        
+        // The post is automatically added to the list via the service
+        // Navigate back to posts list to see the new post
+        setTimeout(() => {
+          this.router.navigate(['/posts']);
+        }, 1000); // Small delay to show success message
+      },
+      error: (err) => {
+        this.errorMessage.set('Failed to create post. Please try again.');
+        this.isLoading.set(false);
+        console.error(err);
+      }
+    });
+  } else {
+    this.errorMessage.set('Please correct the errors in the form.');
+    this.postForm.markAllAsTouched();
   }
-
+}
   
   getSanitizedHtml(html: string): SafeHtml {
     return this.sanitizer.bypassSecurityTrustHtml(html);

@@ -53,3 +53,5 @@ export class AuthInterceptor implements HttpInterceptor {
     );
   }
 }
+
+export { AuthService };
