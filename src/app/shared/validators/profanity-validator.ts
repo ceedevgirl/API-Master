@@ -1,7 +1,7 @@
-import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
+import { AbstractControl, ValidationErrors } from '@angular/forms';
 
 export function profanityValidator(control: AbstractControl): ValidationErrors | null {
-  const forbiddenWords = ['badword', 'swear', 'damn', 'ass', 'fuck', 'shit']; // Example list
+  const forbiddenWords = ['badword', 'swear', 'damn', 'ass', 'fuck', 'shit'];
   const text = control.value as string;
 
   if (!text) {
