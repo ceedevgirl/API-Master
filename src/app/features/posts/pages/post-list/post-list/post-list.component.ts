@@ -18,7 +18,7 @@ export class PostListComponent implements OnInit {
   totalPosts = signal<number>(0);
   currentPage = signal<number>(1);
   itemsPerPage = signal<number>(10);
-  searchTerm = signal<string>(''); // New: Signal for search term
+  searchTerm = signal<string>(''); 
   isLoading = signal<boolean>(false);
   error = signal<string | null>(null);
 
@@ -28,7 +28,7 @@ export class PostListComponent implements OnInit {
 
   constructor() {
     effect(() => {
-      // Respond to currentPage or searchTerm changes to load posts
+      
       this.loadPosts();
     }, { allowSignalWrites: true });
   }

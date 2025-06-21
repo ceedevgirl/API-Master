@@ -1,5 +1,5 @@
 import { Component, OnInit, inject, signal } from '@angular/core';
-import { CommonModule } from '@angular/common'; // Import CommonModule
+import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { ApiService } from '../../../../../core/services/api.service';
 import { Post, Comment } from '../../../../../models/interface';
@@ -9,7 +9,7 @@ import { AuthService } from '../../../../../core/auth/auth.service';
 @Component({
   selector: 'app-post-details',
   standalone: true,
-  imports: [CommonModule, RouterLink], // Make sure CommonModule is imported here
+  imports: [CommonModule, RouterLink],
   templateUrl: './post-details.component.html',
   styleUrl: './post-details.component.scss'
 })
@@ -17,7 +17,7 @@ export class PostDetailsComponent implements OnInit {
   private route = inject(ActivatedRoute);
   private router = inject(Router);
   private apiService = inject(ApiService);
-  private authService = inject(AuthService); // Inject AuthService
+  private authService = inject(AuthService); 
 
   post = signal<Post | null>(null);
   comments = signal<Comment[]>([]);
@@ -40,13 +40,13 @@ export class PostDetailsComponent implements OnInit {
     this.isLoading.set(true);
     this.error.set(null);
 
-    // Fetch post and comments in parallel
+    
     this.apiService.get<Post>(`posts/${id}`).pipe(
       finalize(() => this.isLoading.set(false))
     ).subscribe({
       next: (postData) => {
         this.post.set(postData);
-        // Fetch comments after post is loaded (or in parallel depending on API design)
+        
         this.fetchComments(id);
       },
       error: (err) => {
@@ -61,9 +61,8 @@ export class PostDetailsComponent implements OnInit {
         this.comments.set(commentsData);
       },
       error: (err) => {
-        // Handle comments error separately or log it
+        
         console.error('Failed to load comments:', err);
-        // this.error.set('Failed to load comments: ' + err.message); // Might want to show this
       }
     });
   }
@@ -77,8 +76,7 @@ export class PostDetailsComponent implements OnInit {
     this.router.navigate(['/posts']);
   }
 
-  // --- NEW DELETE METHOD ---
-  deletePost(): void {
+    deletePost(): void {
     const postId = this.post()?.id;
     if (postId && confirm('Are you sure you want to delete this post? This action cannot be undone.')) {
       this.isLoading.set(true);
@@ -88,7 +86,7 @@ export class PostDetailsComponent implements OnInit {
       ).subscribe({
         next: () => {
           alert('Post deleted successfully!');
-          this.router.navigate(['/posts']); // Redirect to post list after successful deletion
+          this.router.navigate(['/posts']); 
         },
         error: (err) => {
           this.error.set('Failed to delete post: ' + err.message);
