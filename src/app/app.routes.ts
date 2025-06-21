@@ -1,16 +1,17 @@
 import { Routes } from '@angular/router';
-import { PostDetailsComponent } from './components/post-detail/post-detail.component';
-import { PostEditComponent } from './components/post-edit/post-edit.component';
-import { PostListComponent } from './components/posts-list/posts-list.component';
-import { authGuard } from './core/guards/auth.guard';
-import { PostCreateComponent } from './components/post-create/post-create.component';
-import { LoginComponent } from './components/login/login.component';
+import { LoginComponent } from './features/auth/login/login/login.component';
+import { PostEditComponent } from './features/posts/pages/post--edit/post-edit/post-edit.component';
+import { PostCreateComponent } from './features/posts/pages/post-create/post-create/post-create.component';
+import { PostDetailsComponent } from './features/posts/pages/post-details/post-details/post-details.component';
+import { PostListComponent } from './features/posts/pages/post-list/post-list/post-list.component';
+import { authGuard } from './core/auth/auth.guard';
 
 export const routes: Routes = [
-  { path: 'login', component: LoginComponent }, // Move login to /login route
-  { path: '', component: PostListComponent }, // Default page (Post list)
-  { path: 'post/:id', component: PostDetailsComponent },
-  { path: 'create', component: PostCreateComponent, canActivate: [authGuard] },
-  { path: 'edit/:id', component: PostEditComponent, canActivate: [authGuard] },
-  { path: '**', redirectTo: '' } // Wildcard to handle unknown routes
+  { path: '', redirectTo: '/posts', pathMatch: 'full' },
+  { path: 'posts', component: PostListComponent },
+  { path: 'posts/create', component: PostCreateComponent, canActivate: [authGuard] },
+  { path: 'posts/:id', component: PostDetailsComponent },
+  { path: 'posts/:id/edit', component: PostEditComponent, canActivate: [authGuard] },
+  { path: 'login', component: LoginComponent },
+  { path: '**', redirectTo: '/posts' } // Wildcard route for 404 or unknown paths
 ];

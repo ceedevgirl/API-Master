@@ -1,4 +1,75 @@
-<div class="container"> 
-      
+<header class="app-header">
+  <div class="header-left">
+    <a routerLink="/" class="logo">My Blog</a>
+  </div>
+
+  <div class="header-center">
+    <div class="search-bar">
+      <input
+        type="text"
+        placeholder="Search posts..."
+        class="search-input"
+        [(ngModel)]="searchTerm"
+        (keyup.enter)="performSearch()"
+      />
+      <button
+        *ngIf="searchTerm"
+        class="clear-search-button"
+        (click)="clearSearch()"
+        title="Clear search"
+      >
+        ✕
+      </button>
+      <!-- <button class="search-button" (click)="performSearch()">
+        
+      </button> -->
     </div>
-<router-outlet />
+  </div>
+
+  <button
+    class="hamburger-icon"
+    [class.menu-open]="isMenuOpen"
+    (click)="toggleMenu()"
+  >
+    <span class="bar"></span>
+    <span class="bar"></span>
+    <span class="bar"></span>
+  </button>
+
+  <div class="header-right" [class.menu-open]="isMenuOpen">
+    <a
+      *ngIf="authService.isAuthenticated()"
+      routerLink="/posts/create"
+      class="nav-link create-post-button"
+      routerLinkActive="active-link"
+      >Create Post</a
+    >
+    <a
+      *ngIf="!authService.isAuthenticated()"
+      routerLink="/login"
+      class="nav-link login-button"
+      routerLinkActive="active-link"
+      >👤 Login</a
+    >
+    <button
+      *ngIf="authService.isAuthenticated()"
+      (click)="logout()"
+      class="nav-link logout-button"
+      >👤 Logout</button
+    >
+  </div>
+
+  <div
+    class="menu-backdrop"
+    [class.show]="isMenuOpen"
+    (click)="closeMenu()"
+  ></div>
+</header>
+
+<main class="main-content">
+  <router-outlet></router-outlet>
+</main>
+
+<footer class="footer">
+  <p>© 2025 Blog App. All rights reserved.</p>
+</footer>

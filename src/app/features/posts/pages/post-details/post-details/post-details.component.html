@@ -1,0 +1,26 @@
+<div class="container post-detail-container">
+  <div *ngIf="isLoading()" class="loading-spinner">Loading post details...</div>
+  <div *ngIf="error()" class="error-message">{{ error() }}</div>
+
+  <div *ngIf="post()" class="post-detail-card">
+    <div class="post-image-container">
+      <img [src]="'https://picsum.photos/600/400?random=' + post()?.id" alt="Post Image" class="post-image">
+    </div>
+    <h1 class="post-title">{{ post()?.title }}</h1>
+    <p class="post-body">{{ post()?.body }}</p>
+
+    <h3 class="comments-title">Comments:</h3>
+    <ul class="comment-list">
+      <li *ngFor="let comment of comments()" class="comment-item">
+        <div class="comment-author">{{ comment.name }} (<a href="mailto:{{ comment.email }}">{{ comment.email }}</a>)</div>
+        <div class="comment-body">{{ comment.body }}</div>
+      </li>
+    </ul>
+
+    <div class="back-link">
+      <a [routerLink]="['/posts']" class="back-button">Back to Posts</a>
+      <a *ngIf="isAuthenticated()" [routerLink]="['/posts', post()?.id, 'edit']" class="edit-button">Edit Post</a>
+      <button *ngIf="isAuthenticated()" (click)="deletePost()" class="delete-button">Delete Post</button>
+    </div>
+  </div>
+</div>

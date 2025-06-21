@@ -1,0 +1,41 @@
+/* Mixins */
+@use './variables' as *;
+
+// Mixins
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin card-shadow {
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+}
+
+@mixin glass-card {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+@mixin button-styles($bg: $primary-color, $text: #fff) {
+  background: $bg;
+  color: $text;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 30px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
+  &:hover {
+    transform: scale(1.05);
+    filter: brightness(1.1);
+  }
+
+  &:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+}

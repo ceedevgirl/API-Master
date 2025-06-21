@@ -1,0 +1,54 @@
+<div class="container post-form-container">
+  <h1 class="form-title">Edit Post</h1>
+
+  <div *ngIf="isLoading()" class="loading-spinner">Loading post for editing...</div>
+  <div *ngIf="errorMessage() && !isLoading()" class="error-message">{{ errorMessage() }}</div>
+
+  <form [formGroup]="postForm" (ngSubmit)="onSubmit()" class="post-form" *ngIf="!isLoading() && postForm.value.id">
+    <input type="hidden" formControlName="id">
+
+    <div class="form-group">
+      <label for="title">Title:</label>
+      <input id="title" type="text" formControlName="title" placeholder="Enter post title">
+      <div
+        *ngIf="postForm.get('title')?.invalid && (postForm.get('title')?.dirty || postForm.get('title')?.touched)"
+        class="validation-error"
+      >
+        <div *ngIf="postForm.get('title')?.errors?.['required']">Title is required.</div>
+        <div *ngIf="postForm.get('title')?.errors?.['minlength']">Title must be at least 5 characters long.</div>
+        <div *ngIf="postForm.get('title')?.errors?.['profanity']">Title contains forbidden words.</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="body">Body:</label>
+      <textarea id="body" formControlName="body" rows="8" placeholder="Enter post content"></textarea>
+      <div
+        *ngIf="postForm.get('body')?.invalid && (postForm.get('body')?.dirty || postForm.get('body')?.touched)"
+        class="validation-error"
+      >
+        <div *ngIf="postForm.get('body')?.errors?.['required']">Body is required.</div>
+        <div *ngIf="postForm.get('body')?.errors?.['minlength']">Body must be at least 20 characters long.</div>
+        <div *ngIf="postForm.get('body')?.errors?.['profanity']">Body contains forbidden words.</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="userId">User ID:</label>
+      <input id="userId" type="number" formControlName="userId">
+      <div
+        *ngIf="postForm.get('userId')?.invalid && (postForm.get('userId')?.dirty || postForm.get('userId')?.touched)"
+        class="validation-error"
+      >
+        <div *ngIf="postForm.get('userId')?.errors?.['required']">User ID is required.</div>
+      </div>
+    </div>
+
+    <button type="submit" [disabled]="!postForm.valid || isLoading()" class="submit-button">
+      <span *ngIf="!isLoading()">Update Post</span>
+      <span *ngIf="isLoading()">Updating...</span>
+    </button>
+
+    <div *ngIf="successMessage()" class="success-message">{{ successMessage() }}</div>
+  </form>
+</div>

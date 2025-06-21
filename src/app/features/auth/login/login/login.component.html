@@ -1,0 +1,34 @@
+<div class="container login-container">
+  <h1 class="login-title">Login</h1>
+
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
+    <div class="form-group">
+      <label for="username">Username:</label>
+      <input id="username" type="text" formControlName="username" placeholder="Enter your username">
+      <div
+        *ngIf="loginForm.get('username')?.invalid && (loginForm.get('username')?.dirty || loginForm.get('username')?.touched)"
+        class="validation-error"
+      >
+        <div *ngIf="loginForm.get('username')?.errors?.['required']">Username is required.</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="password">Password:</label>
+      <input id="password" type="password" formControlName="password" placeholder="Enter your password">
+      <div
+        *ngIf="loginForm.get('password')?.invalid && (loginForm.get('password')?.dirty || loginForm.get('password')?.touched)"
+        class="validation-error"
+      >
+        <div *ngIf="loginForm.get('password')?.errors?.['required']">Password is required.</div>
+      </div>
+    </div>
+
+    <button type="submit" [disabled]="!loginForm.valid || isLoading()" class="login-button">
+      <span *ngIf="!isLoading()">Login</span>
+      <span *ngIf="isLoading()">Logging in...</span>
+    </button>
+
+    <div *ngIf="errorMessage()" class="error-message">{{ errorMessage() }}</div>
+  </form>
+</div>
