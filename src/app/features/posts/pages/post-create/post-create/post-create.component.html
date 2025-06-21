@@ -22,8 +22,14 @@
         Content is required.
       </div>
       <div *ngIf="postForm.get('body')?.errors?.['minlength'] && (postForm.get('body')?.dirty || postForm.get('body')?.touched)" class="invalid-feedback">
-        Content must be at least 10 characters long.
+        Content must be at least 20 characters long.
       </div>
+       <label for="tag">Tag:</label>
+  <input id="tag" formControlName="tag" type="text" placeholder="Post Tag"
+         [class.is-invalid]="postForm.get('tag')?.invalid && (postForm.get('tag')?.dirty || postForm.get('tag')?.touched)">
+  <div *ngIf="postForm.get('tag')?.errors?.['required'] && (postForm.get('tag')?.dirty || postForm.get('tag')?.touched)" class="invalid-feedback">
+    Tag is required.
+  </div>
     </div>
 
     <button type="submit" [disabled]="postForm.invalid" class="submit-button">Create Post</button>
