@@ -1,49 +1,41 @@
-@use 'variables' as *;
+/* Mixins */
+@use './variables' as *;
 
-// Flex helpers
-@mixin flex-between {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
+// Mixins
 @mixin flex-center {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-// Button hover transition
-@mixin neon-hover {
-  &:hover {
-    background-color: $white;
-    color: $black;
-    transform: translateY(-4px);
-    box-shadow: $shadow-neon;
-  }
+@mixin card-shadow {
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
 }
 
-// Card hover effect
-@mixin card-hover {
+@mixin glass-card {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+@mixin button-styles($bg: $primary-color, $text: #fff) {
+  background: $bg;
+  color: $text;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 30px;
+  font-weight: 600;
+  cursor: pointer;
   transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 
   &:hover {
-    transform: translateY(-5px) rotate(1deg);
-    box-shadow: $shadow-medium;
+    transform: scale(1.05);
+    filter: brightness(1.1);
   }
-}
 
-// Fade-in animation
-@mixin fade-in {
-  animation: fadeIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
-}
-
-// Spinner
-@mixin spinner($size: 24px, $border-color: rgba(255,255,255,0.3), $top-color: $gradient-end) {
-  width: $size;
-  height: $size;
-  border: 3px solid $border-color;
-  border-top-color: $top-color;
-  border-radius: 50%;
-  animation: spin 1s ease-in-out infinite;
+  &:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
 }

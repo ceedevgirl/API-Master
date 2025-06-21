@@ -1,25 +1,18 @@
+// variables.scss
+$primary-color: #6C63FF; // Soft Indigo
+$accent-color: #FF6F91; // Coral Pink
+$warn-color: #FF4B5C;   // Vivid Red
+$text-color: #2D2D2D;
+$background-color: #F9FAFB;
+$card-background: #ffffff;
+$border-color: #e0e0e0;
+$gradient-primary: linear-gradient(135deg, #6C63FF, #48C6EF);
+$gradient-accent: linear-gradient(135deg, #FF6F91, #FFC371);
+$gradient-primary: linear-gradient(135deg, $primary-color, $accent-color);
+$heading-color: #222;
 
-// Gradients
-$gradient-start: #ff00cc;
-$gradient-end: #3333ff;
-$neon-pink: #ff00ff;
-$neon-blue: #00ffff;
-$neon-purple: #9900ff;
 
-// Colors
-$white: #ffffff;
-$black: #000000;
-$error-red: #ef4444;
-$text-light: rgba(255, 255, 255, 0.8);
-$gray-border: #e5e7eb;
-$gray-light: #f9fafb;
 
-// Radius
-$radius-sm: 0.5rem;
-$radius-md: 0.75rem;
-$radius-xl: 1rem;
-
-// Shadows
-$shadow-light: 0 2px 8px rgba(0, 0, 0, 0.05);
-$shadow-medium: 0 10px 20px rgba(0, 0, 0, 0.1);
-$shadow-neon: 0 0 15px $neon-blue, 0 0 20px $neon-pink;
+// Typography
+$font-family: 'Poppins', sans-serif;
+$heading-color: #1f1f1f;

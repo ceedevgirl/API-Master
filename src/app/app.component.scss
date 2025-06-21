@@ -1,0 +1,298 @@
+@use './styles/variables' as *;
+@use './styles/mixins' as *;
+
+/* =========================
+   HEADER STYLES
+========================= */
+
+.app-header {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 1rem;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+
+  .header-left {
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-decoration: none;
+      white-space: nowrap;
+
+      &:hover {
+        transform: scale(1.05);
+      }
+    }
+  }
+
+  .header-center {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 20px;
+
+    .search-bar {
+      position: relative;
+      display: flex;
+      align-items: center;
+      width: 100%;
+      max-width: 400px;
+
+      .search-input {
+        width: 100%;
+        padding: 10px 40px 10px 15px;
+        border: 1px solid #ced4da;
+        border-radius: 25px;
+        font-size: 1rem;
+        outline: none;
+        transition: border-color 0.2s;
+
+        &:focus {
+          border-color: $primary-color;
+        }
+      }
+
+      .search-icon {
+        position: absolute;
+        right: 10px;
+        background: none;
+        border: none;
+        color: $text-color;
+        font-size: 1.2rem;
+        cursor: pointer;
+        padding: 5px;
+        border-radius: 50%;
+        transition: color 0.2s;
+
+        &:hover {
+          color: $primary-color;
+        }
+
+    .clear-search-button {
+    position: absolute;
+    right: -38px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #000e00;
+    border: none;
+    font-size: 1.2rem;
+    color: $text-color;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 50%;
+    font-size: 1.2rem;
+    font-weight: 900;
+    transition: color 0.2s;
+
+    &:hover {
+      color: $primary-color;
+    }
+  }
+}
+      }
+    }
+  
+
+  .hamburger-icon {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 28px;
+    height: 22px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 101;
+
+    .bar {
+      width: 100%;
+      height: 3px;
+      background-color: white;
+      border-radius: 2px;
+      transition: all 0.3s ease;
+    }
+
+    &.menu-open {
+      .bar:nth-child(1) {
+        transform: translateY(9px) rotate(45deg);
+      }
+
+      .bar:nth-child(2) {
+        opacity: 0;
+      }
+
+      .bar:nth-child(3) {
+        transform: translateY(-9px) rotate(-45deg);
+      }
+    }
+  }
+
+  .header-right {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+
+    .create-post-button {
+      @include button-styles($primary-color, #fff);
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .login-button,
+    .logout-button {
+      color: $text-color;
+      padding: 8px 15px;
+      border-radius: 50px;
+      background: rgba(255, 255, 255, 0.2);
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      text-decoration: none;
+      white-space: nowrap;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.3);
+        transform: translateY(-2px);
+      }
+    }
+  }
+}
+
+/* =========================
+   MOBILE NAVIGATION
+========================= */
+@media (max-width: 767px) {
+  .app-header {
+    flex-wrap: wrap;
+
+    .header-center {
+      display: none;
+    }
+
+    .hamburger-icon {
+      display: flex;
+    }
+
+    .header-right {
+      flex-direction: column;
+      align-items: flex-end;
+    //   background: rgba(0, 0, 0, 0.9);
+      width: 100%;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      padding: 1rem;
+      display: none;
+
+       a,
+      .create-post-button {
+        width: 40%;
+        text-align: center;
+        margin-bottom: 0.75rem;
+        color: white;
+        //   padding: 2rem;
+      }
+
+      &.menu-open {
+        display: flex;
+      }
+    }
+
+    .menu-backdrop {
+      position: fixed;
+      inset: 0;
+    //   background: rgba(0, 0, 0, 0.5);
+      display: none;
+      z-index: 98;
+
+      &.show {
+        display: block;
+      }
+    }
+  }
+}
+
+@media (max-width: 1023px) {
+  .app-header {
+    flex-wrap: wrap;
+
+    .header-center {
+      display: block;
+    }
+
+    .hamburger-icon {
+      display: flex;
+    }
+
+    .header-right {
+      flex-direction: column;
+      align-items: flex-end;
+    //   background: rgba(0, 0, 0, 0.9);
+      width: 100%;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      padding: 1rem;
+      display: none;
+
+      a,
+      button {
+        width: 40%;
+        text-align: center;
+        margin-bottom: 0.75rem;
+        color: white;
+      }
+
+      &.menu-open {
+        display: flex;
+      }
+    }
+
+    .menu-backdrop {
+      position: fixed;
+      inset: 0;
+    //   background: rgba(0, 0, 0, 0.5);
+      display: none;
+      z-index: 1001;
+
+      &.show {
+        display: block;
+      }
+    }
+  }
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+.footer {
+  background: $gradient-primary;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+  font-size: 0.95rem;
+  margin-top: auto;
+  position: sticky;
+  bottom: 0;
+  z-index: 50;
+  @include card-shadow;
+
+  p {
+    margin: 0;
+    font-weight: 300;
+    letter-spacing: 0.5px;
+  }
+}

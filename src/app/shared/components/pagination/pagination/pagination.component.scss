@@ -1,0 +1,52 @@
+// No longer need to import sass:color
+@use '../../../../styles/variables' as *;
+@use '../../../../styles/mixins' as *; // Ensure this path is correct based on your project structure
+
+.pagination {
+  @include flex-center();
+  gap: 10px;
+  margin-top: 20px;
+  padding: 10px;
+  // background-color: #fff;
+  border-radius: 8px;
+  @include card-shadow();
+
+  button {
+    @include button-styles($primary-color, #fff); // This mixin might still use $primary-color
+    min-width: 40px;
+    padding: 8px 12px;
+    cursor: pointer;
+    border: 1px solid $primary-color;
+    background-color: transparent;
+    color: $primary-color;
+
+    &:hover:not([disabled]) {
+      // Using a slightly lighter primary color directly
+      background-color: #e0f2f7; // Example light blue, adjust to match your $primary-color
+      color: $text-color;
+    }
+
+    &.active {
+      background-color: $primary-color;
+      color: #fff;
+      font-weight: bold;
+      border-color: $primary-color;
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      
+      border-color: #cccccc; 
+      color: #999999;       
+    }
+  }
+
+  .ellipsis {
+    padding: 8px 0;
+    color: $primary-color;
+    font-size: 1em;
+    min-width: 20px;
+    text-align: center;
+  }
+}

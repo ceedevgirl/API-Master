@@ -1,0 +1,85 @@
+@use '../../../../../styles/variables' as *;
+@use '../../../../../styles/mixins' as *;
+
+
+
+.post-form-container {
+  padding: 20px;
+}
+
+.form-title {
+  color: #fff;
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 2em;
+}
+
+.post-form {
+  @include card-shadow();
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+
+    label {
+      font-weight: bold;
+      margin-bottom: 8px;
+      color: $text-color;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    textarea {
+      padding: 12px;
+      border: 1px solid $border-color;
+      border-radius: 4px;
+      font-size: 1em;
+      transition: border-color 0.3s ease;
+
+      &:focus {
+        outline: none;
+        border-color: $primary-color;
+      }
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    .validation-error {
+      color: $warn-color;
+      font-size: 0.9em;
+      margin-top: 5px;
+    }
+  }
+
+  .submit-button {
+    @include button-styles($accent-color, #fff);
+    font-size: 1.1em;
+    padding: 12px 20px;
+    align-self: flex-end;
+  }
+
+  .success-message {
+    background-color: #4CAF50;
+    color: #fff;
+    padding: 10px;
+    border-radius: 4px;
+    text-align: center;
+  }
+
+  .error-message {
+    background-color: $warn-color;
+    color: $warn-color;
+    padding: 10px;
+    border-radius: 4px;
+    text-align: center;
+  }
+}

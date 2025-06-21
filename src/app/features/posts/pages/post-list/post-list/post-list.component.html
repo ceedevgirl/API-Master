@@ -1,0 +1,22 @@
+<div class="container">
+  <div class="post-cards">
+    <div *ngFor="let post of posts()" class="post-card">
+      <img [src]="'https://picsum.photos/300/200?random=' + post.id" alt="Post Image" class="post-image">
+      <h2><a [routerLink]="['/posts', post.id]">{{ post.title }}</a></h2>
+      <p>{{ post.body | slice:0:100 }}...</p>
+      <div class="card-actions">
+        <a [routerLink]="['/posts', post.id]" class="view-details-button">Read More</a>
+      </div>
+    </div>
+  </div>
+
+  <app-pagination
+    *ngIf="totalPosts() > 0"
+    [totalItems]="totalPosts()"
+    [itemsPerPage]="itemsPerPage()"
+    [currentPage]="currentPage()"
+    (pageChange)="onPageChange($event)"
+  ></app-pagination>
+
+  <button class="clear-cache-button" (click)="clearCache()">Clear Post List Cache (Conceptual)</button>
+</div>
