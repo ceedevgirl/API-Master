@@ -10,11 +10,7 @@ import { environment } from '../../../environments/environment';
   providedIn: 'root'
 })
 export class ApiService {
-<<<<<<< HEAD
-  private baseUrl = environment.NG_APP_API_URL;
-=======
-  private apiUrl = environment.apiUrl;
->>>>>>> dev
+  private apiUrl = environment.NG_APP_API_URL;
 
   constructor(
     private http: HttpClient,
@@ -24,7 +20,7 @@ export class ApiService {
 
   /**
    * Performs a GET request.
-   * @param path The API endpoint path (e.g., 'posts').
+   * @param path The API endpoint path ('posts').
    * @param params Optional HTTP parameters.
    * @param useCache Whether to use caching for this request.
    * @returns An Observable of the response body.
@@ -37,14 +33,7 @@ export class ApiService {
       const cachedResponse = this.cacheService.get(cacheKey);
       if (cachedResponse) {
         return cachedResponse.pipe(
-          // Assuming the cached response is HttpResponse<T>, we need to map back to T
-          // This might require a slight adjustment if you want the full HttpResponse or just body
-          // For simplicity, let's assume get returns Observable<T> directly
-          // If CacheService.get returns Observable<HttpResponse<any>>, then adjust the return type here:
-          // map(res => res.body as T)
-          // For now, let's assume CacheService returns the data directly.
-          // If CacheService.get returns Observable<HttpResponse<any>>, you'd need to adjust here:
-          // map(res => res.body as T)
+          
         ) as Observable<T>; // Type assertion to satisfy return type
       }
     }
@@ -109,7 +98,7 @@ export class ApiService {
     );
   }
 
-  // Overload for when full HttpResponse is desired (e.g., for pagination headers or caching)
+  // Overload for when full HttpResponse is desired ( for pagination headers or caching)
   getWithResponse<T>(path: string, params: HttpParams = new HttpParams(), useCache: boolean = true): Observable<HttpResponse<T>> {
     const url = `${this.apiUrl}/${path}`;
     const cacheKey = `${url}?${params.toString()}`;
